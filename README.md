@@ -20,4 +20,5 @@
 
 Связь с разработчиком:
 VK: https://vk.com/step_ka_rpekin
-Telegram: @odinprobeldva
+Telegram: @odinprobeldva.
+Ссылка на бота: t.me/group_0310_leti_bot.
