@@ -10,6 +10,7 @@ from app.loader import dp, bot
 from app.states.admin_states import GetAdmin, DeleteAdmin
 from app.utils.db_api.quick_commands.quick_commands_user import update_admin_status, select_user, select_all_admins, \
     update_user_full_name
+from app.utils.misc import rate_limit
 from app.utils.misc.texts.admins_text import admins_text, admins_for_user_text
 
 
@@ -26,6 +27,7 @@ async def new_admin_added_mailing(editor, user):
                            text="\n".join(text))
 
 
+@rate_limit(5, "get_id")
 @dp.message_handler(Command("get_id"))
 async def send_user_id(message: types.Message):
     await message.answer(f"Твой id: {message.from_user.id}")
@@ -96,6 +98,7 @@ async def show_admins_list(message: types.Message):
     await message.answer("\n".join(admins_list))
 
 
+@rate_limit(5, "show_admins")
 @dp.message_handler(Command("show_admins"))
 async def show_admins_list(message: types.Message):
     admins = await select_all_admins()

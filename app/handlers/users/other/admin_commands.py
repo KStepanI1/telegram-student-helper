@@ -3,8 +3,10 @@ from aiogram.dispatcher.filters import Command
 
 from app.filters.IsAdmin import IsAdminFilter
 from app.loader import dp
+from app.utils.misc import rate_limit
 
 
+@rate_limit(5, "admin_commands")
 @dp.message_handler(Command("admin_commands"), IsAdminFilter())
 async def show_admin_commands(message: types.Message):
     admin_commands_text = [
