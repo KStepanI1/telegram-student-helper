@@ -23,4 +23,4 @@ VK: https://vk.com/step_ka_rpekin
 Telegram: @odinprobeldva.
 
 
-Ссылка на бота: https://t.me/group_0310_leti_bot
+Ссылка на бота: https://t.me/leti_group_0310_bot
