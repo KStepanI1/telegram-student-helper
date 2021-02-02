@@ -10,5 +10,5 @@ from app.utils.misc import rate_limit
 async def show_help(message: types.Message):
     await message.answer("Я не знаю что сюда писать, тут и так все понятно\n"
                          "/commands - команда которая тебе поможет")
-    await message.answer_sticker("CAACAgEAAxkBAAIexWAEQne8DPUzSJcFUD04nTb5tNR-AAJ5DwACmX-IAuGMHI9M_qbfHgQ")
+    await message.answer_sticker("CAACAgIAAxkBAAIBTmAZK6y5lGoWa7jXTbX7ENqdHTOEAAIKBwACRvusBFNTipZg0G-tHgQ")
 

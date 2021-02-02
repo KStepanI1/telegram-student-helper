@@ -1,4 +1,5 @@
 import asyncio
+import random
 
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import DEFAULT_RATE_LIMIT
@@ -65,7 +66,9 @@ class ThrottlingMiddleware(BaseMiddleware):
 
         # Prevent flooding
         if throttled.exceeded_count <= 2:
-            await message.reply('Слишком много одинаковых запросов!')
+            await message.reply('Слишком много запросов!\n'
+                                'Подожди 5 секунд и повтори попытку')
+            await message.answer_sticker("CAACAgIAAxkBAAIBKWAZKp9hirJO4eoMhJK-KsgAATsuZwAC9wYAAkb7rARWm6hbD5l2HR4E")
 
         # Sleep.
         await asyncio.sleep(delta)
