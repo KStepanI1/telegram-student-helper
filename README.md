@@ -1,4 +1,4 @@
-# student_helper - телеграм бот-помощник для студентов  
+# Student helper - telegram bot  
 
 **Функции бота:**
 
