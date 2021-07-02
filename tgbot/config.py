@@ -1,20 +1,21 @@
 from dataclasses import dataclass
 
 from environs import Env
+from typing import List
 
 
 @dataclass
 class DbConfig:
+    database: str
     host: str
     password: str
     user: str
-    database: str
 
 
 @dataclass
 class TgBot:
     token: str
-    admin_ids: list[int]
+    admin_ids: List[int]
     use_redis: bool
 
 
