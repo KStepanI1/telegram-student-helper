@@ -54,7 +54,7 @@ class User(TimeBasedModels):
         return f"№{self.id} {self.user_id} - {self.name}"
 
 
-class Subjects(TimeBasedModels):
+class Subject(TimeBasedModels):
     class Meta:
         verbose_name = "Предмет"
         verbose_name_plural = "Предметы"
@@ -66,13 +66,13 @@ class Subjects(TimeBasedModels):
         return f"№{self.id} - {self.name}"
 
 
-class ZoomLinks(TimeBasedModels):
+class ZoomLink(TimeBasedModels):
     class Meta:
         verbose_name = "ZOOM ссылка"
         verbose_name_plural = "ZOOM ссылки"
 
     id = models.AutoField(primary_key=True)
-    subject = models.ForeignKey(Subjects, verbose_name="Предмет", on_delete=models.SET(0))
+    subject = models.ForeignKey(Subject, verbose_name="Предмет", on_delete=models.SET(0))
     type = MultiSelectField(choices=TYPES, max_choices=2)
     url = models.URLField(verbose_name="Ссылка (optional)", blank=True, null=True)
     code = models.CharField(max_length=100, verbose_name="Код")
@@ -82,7 +82,7 @@ class ZoomLinks(TimeBasedModels):
         return f"№{self.id} - {self.subject} ({self.type})"
 
 
-class Teachers(TimeBasedModels):
+class Teacher(TimeBasedModels):
     class Meta:
         verbose_name = "Перподаватель"
         verbose_name_plural = "Преподаватели"
@@ -91,7 +91,7 @@ class Teachers(TimeBasedModels):
     last_name = models.CharField(max_length=100, verbose_name="Фамилия")
     first_name = models.CharField(max_length=100, verbose_name="Имя")
     middle_name = models.CharField(max_length=100, verbose_name="Отчество (optional)", blank=True, null=True)
-    subject = models.ForeignKey(Subjects, verbose_name="Предмет", on_delete=models.SET(0))
+    subject = models.ForeignKey(Subject, verbose_name="Предмет", on_delete=models.SET(0))
     type = MultiSelectField(choices=TYPES, max_choices=2, verbose_name="Тип пары")
     email = models.EmailField(verbose_name="Email адрес")
 
@@ -107,7 +107,7 @@ class Timetable(TimeBasedModels):
     id = models.AutoField(primary_key=True)
     weekday = MultiSelectField(choices=WEEK_DAYS, max_choices=1, verbose_name="День недели")
     lesson_number = MultiSelectField(choices=LESSON_NUMBERS, verbose_name="Номер пары")
-    subject = models.ForeignKey(Subjects, verbose_name="Предмет", on_delete=models.SET(0))
+    subject = models.ForeignKey(Subject, verbose_name="Предмет", on_delete=models.SET(0))
     audience_number = models.CharField(max_length=100 ,verbose_name="Номер аудитории (optional)", blank=True, null=True)
     type = MultiSelectField(choices=TYPES, max_choices=1, verbose_name="Тип пары")
     week_parity = MultiSelectField(choices=WEEK_PARITIES, verbose_name="Четность недели")

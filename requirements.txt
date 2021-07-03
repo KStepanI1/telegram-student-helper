@@ -1,8 +1,9 @@
 aiogram~=2.12.1
 aioredis
 environs~=8.0.0
-django
+django~=3.2.5
 Django>=3.0
 psycopg2-binary
 jsonfield
 django-multiselectfield
+asgiref~=3.4.1
