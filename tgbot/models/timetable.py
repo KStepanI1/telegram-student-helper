@@ -3,13 +3,10 @@ from typing import List
 
 from asgiref.sync import sync_to_async
 
-from bot import logger
 from django_project.usersmanage.models import Timetable
+from tgbot.misc.auxiliary_sets import days
 
 
 @sync_to_async
 def get_timetable_for(weekday) -> List[Timetable]:
-    try:
-        return Timetable.objects.filter(weekday=weekday).all()
-    except Exception as exception:
-        logger.exception(exception)
+    return Timetable.objects.filter(weekday__code=weekday).all()
