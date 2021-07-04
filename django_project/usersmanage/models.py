@@ -7,15 +7,6 @@ TYPES = (
     ('prac', 'Практика')
 )
 
-WEEK_DAYS = (
-    ("mon", "Понедельник"),
-    ("tue", "Вторник"),
-    ("wed", "Среда"),
-    ("thu", "Четверг"),
-    ("fri", "Пятница"),
-    ("sat", "Суббота"),
-)
-
 LESSON_NUMBERS = (
     ("1", "1-ая пара"),
     ("2", "2-ая пара"),
@@ -27,8 +18,8 @@ LESSON_NUMBERS = (
 )
 
 WEEK_PARITIES = (
-    ("even", "Четная"),
-    ("odd", "Нечетная")
+    ("1", "Нечетная"),
+    ("2", "Четная"),
 )
 
 
@@ -99,19 +90,33 @@ class Teacher(TimeBasedModels):
         return f"№{self.id} - {self.first_name} {self.middle_name} ({self.subject} - {self.type})"
 
 
+class Weekday(TimeBasedModels):
+    class Meta:
+        verbose_name = "День недели"
+        verbose_name_plural = "Дни недели"
+
+    id = models.AutoField(primary_key=True)
+    code = models.CharField(max_length=3, verbose_name="Код", default=1)
+    name = models.CharField(max_length=100, verbose_name="Название")
+
+    def __str__(self):
+        return f"№{self.id} - {self.name}"
+
+
 class Timetable(TimeBasedModels):
     class Meta:
         verbose_name = "Расписание"
         verbose_name_plural = "Расписание"
 
     id = models.AutoField(primary_key=True)
-    weekday = MultiSelectField(choices=WEEK_DAYS, max_choices=1, verbose_name="День недели")
+    weekday = models.ForeignKey(Weekday, verbose_name="День недели", on_delete=models.SET(0))
     lesson_number = MultiSelectField(choices=LESSON_NUMBERS, verbose_name="Номер пары")
     subject = models.ForeignKey(Subject, verbose_name="Предмет", on_delete=models.SET(0))
-    audience_number = models.CharField(max_length=100 ,verbose_name="Номер аудитории (optional)", blank=True, null=True)
+    audience_number = models.CharField(max_length=100, verbose_name="Номер аудитории (optional)", blank=True, null=True)
     type = MultiSelectField(choices=TYPES, max_choices=1, verbose_name="Тип пары")
     week_parity = MultiSelectField(choices=WEEK_PARITIES, verbose_name="Четность недели")
 
     def __str__(self):
         return f"№{self.id} - {self.weekday} {self.subject} (Пара №{self.lesson_number})"
+
 
