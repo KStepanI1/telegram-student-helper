@@ -28,3 +28,7 @@ def count_users():
     return User.objects.all().count()
 
 
+@sync_to_async
+def update_user(user_id, full_name, username):
+    User.objects.filter(user_id=user_id).update(username=username, name=full_name)
+
